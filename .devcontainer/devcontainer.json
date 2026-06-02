@@ -6,6 +6,9 @@
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
+  "appPort": [
+    "4200:4200"
+  ],
   "forwardPorts": [
     4200,
     9222
@@ -22,18 +25,17 @@
   },
   "onCreateCommand": "sudo chmod 666 /var/run/docker.sock",
   "updateContentCommand": {
-    "setOwnership": "sudo chown -R dev:dev ${containerWorkspaceFolder} /ursim-polyscopex-0.17.137 /sdk-polyscopex-6.4.59"
+    "setOwnership": "sudo chown -R dev:dev ${containerWorkspaceFolder} /ursim-polyscopex-0.18.96 /sdk-polyscopex-6.5.65"
   },
   "postCreateCommand": {
-    "prepareUrsim": "sudo rm -f run-simulator && ln -s /ursim-polyscopex-0.17.137/run-simulator ${containerWorkspaceFolder}",
-    "prepareSdk": "sudo rsync -ac --info=progress2 --exclude=install.sh --exclude=readme.txt /sdk-polyscopex-6.4.59/ ${containerWorkspaceFolder}"
+    "prepareUrsim": "sudo rm -f run-simulator && ln -s /ursim-polyscopex-0.18.96/run-simulator ${containerWorkspaceFolder}",
+    "prepareSdk": "sudo rsync -ac --info=progress2 --exclude=install.sh --exclude=readme.txt /sdk-polyscopex-6.5.65/ ${containerWorkspaceFolder}"
   },
   "postStartCommand": "sudo chmod 666 /var/run/docker.sock",
   "containerEnv": {
     "SHELL": "/bin/bash",
     "DEV_CONTAINER": "true",
-    "containerWorkspaceFolder": "${containerWorkspaceFolder}",
-    "DOCKER_API_VERSION": "1.43"
+    "containerWorkspaceFolder": "${containerWorkspaceFolder}"
   },
   "runArgs": [
     "--add-host=host.docker.internal:host-gateway",
@@ -46,7 +48,7 @@
         "angular.languageServer.useBundled": true,
         "angular.forceStrictTemplates": true,
         "yaml.schemas": {
-          "manifest-spec-19.9.9.json": ["manifest.yaml"]
+          "manifest-spec-19.10.31.json": ["manifest.yaml"]
         }
       },
       "extensions": [
