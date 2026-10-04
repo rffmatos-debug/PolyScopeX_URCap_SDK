@@ -112,3 +112,35 @@ side pressing the three dots to open a menu to either select the
 There are more information on
 the official page about [lifecycle of codespaces](https://docs.github.com/en/codespaces/getting-started/understanding-the-codespace-lifecycle)
 which also describes the above in more detail, along with reentering and restarting a codespace.
+
+## Exímia / BamBlue development switch
+
+The local development workspace contains two independent welding URCaps:
+
+- `eximia-10.13`;
+- `bamblue-10.13`.
+
+They are intentionally **mutually exclusive** in the same PolyScope X simulator because both use the same host-side RPC ports. Do not install both at the same time.
+
+When switching products, with the simulator already running, use:
+
+```bash
+bash tools/switch-psx.sh eximia
+```
+
+or:
+
+```bash
+bash tools/switch-psx.sh bamblue
+```
+
+The helper:
+
+1. checks that both local project folders exist;
+2. uses the target project's simulator preflight when available;
+3. removes the currently active opposite URCap;
+4. runs `npm run install-fast` in the requested project.
+
+If the requested product is already active, use that project's normal `npm run install-fast` instead of the switch helper.
+
+Default project paths can be overridden with `EXIMIA_PSX_DIR` and `BAMBLUE_PSX_DIR`.
